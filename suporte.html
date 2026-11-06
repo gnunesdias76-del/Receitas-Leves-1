@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suporte — Receitas Leves</title>
+<meta name="description" content="Canais de atendimento e suporte.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--green:#1f4d3a;--green2:#2d6a50;--gold:#8f6c2e;--gold-line:#c9a45c;--cream:#faf6ee;--warm:#f5ecda;--paper:#fffdf8;--ink:#23312b;--muted:#5d6b64;--line:#e6dfcf;--serif:'Fraunces',Georgia,serif;--sans:'Inter',system-ui,-apple-system,sans-serif}
+*{box-sizing:border-box;margin:0}
+body{font:16px/1.6 var(--sans);color:var(--ink);background:var(--cream);-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.15;color:var(--green)}
+a{color:var(--green2)}
+.bar{background:var(--warm);border-bottom:1px solid var(--line);padding:14px 20px}
+.bar a{display:inline-flex;gap:6px;align-items:center;font-size:14.5px;font-weight:500;text-decoration:none;color:var(--green)}
+.bar a:hover{text-decoration:underline}
+main{max-width:760px;margin:0 auto;padding:44px 20px 64px}
+main h1{font-size:clamp(30px,6vw,42px)}
+.upd{font-size:13.5px;color:var(--muted);margin-top:8px}
+.intro{margin-top:18px;color:var(--muted)}
+main h3{font-size:20px;margin:30px 0 4px}
+main p,main li{font-size:16px;color:var(--muted);margin-top:8px}
+main ul{padding-left:22px}
+main b{color:var(--ink);font-weight:600}
+footer{border-top:1px solid var(--line);padding:30px 20px;text-align:center;font-size:14px;color:var(--muted)}
+footer nav{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
+footer a{color:var(--green);text-decoration:none;font-weight:500}
+footer a:hover{text-decoration:underline}
+
+.cards{display:grid;gap:14px;margin-top:26px}
+.c{display:flex;gap:16px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 20px;box-shadow:0 8px 24px rgba(35,49,43,.06)}
+.c svg{width:26px;height:26px;stroke:var(--green);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.c small{display:block;font-size:12.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--gold)}
+.c .v{font-size:19px;font-weight:600;color:var(--ink);text-decoration:none;word-break:break-all}
+.c a.v:hover{text-decoration:underline}
+.wa{display:inline-block;margin-top:6px;font-size:14px;font-weight:600;color:var(--green2)}
+.empty{margin-top:26px;padding:18px 20px;background:var(--paper);border:1px dashed var(--gold-line);border-radius:14px;text-align:center}
+</style>
+</head>
+<body>
+<div class="bar"><a href="index.html">&larr; Voltar para a página do livro</a></div>
+<main>
+<h1>Suporte</h1>
+<p class="intro">Precisa de ajuda com o acesso ao livro, com a compra ou com um pedido de reembolso? Fale com a gente por um dos canais abaixo.</p>
+<div class="cards" id="cards"></div>
+<p class="empty" id="empty" hidden>Os canais de atendimento serão informados em breve.</p>
+<h3>Antes de entrar em contato</h3>
+<ul>
+<li>Se não recebeu o e-mail com o acesso, confira a caixa de spam e a de promoções.</li>
+<li>Informe o e-mail usado na compra, para a gente localizar o seu pedido mais rápido.</li>
+<li>Você tem 7 dias corridos, a partir da compra, para pedir cancelamento e reembolso (art. 49 do CDC).</li>
+</ul>
+</main>
+<footer>
+<nav><a href="politica-de-privacidade.html">Política de Privacidade</a><a href="termos-de-uso-e-compra.html">Termos de Uso e Compra</a><a href="suporte.html">Suporte</a></nav>
+<p>&copy; <span id="yr"></span> Receitas Leves</p>
+</footer>
+<script>document.getElementById("yr").textContent = new Date().getFullYear();</script>
+<script>
+/* =====================================================
+   PREENCHA AQUI os dados de suporte (entre as aspas).
+   Deixe "" no que não quiser mostrar: esse canal some da página.
+   ===================================================== */
+const SUPORTE = {
+  telefone: "",        // exemplo: "(11) 91234-5678"
+  email:    "",        // exemplo: "suporte@seudominio.com.br"
+  whatsapp: false      // troque para true se o número do telefone for WhatsApp (mostra o botão "Chamar no WhatsApp")
+};
+
+(function(){
+  const box = document.getElementById("cards");
+  const ico = {
+    tel:'<svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>',
+    mail:'<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>'
+  };
+  const esc = t => String(t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  let n = 0;
+  const tel = (SUPORTE.telefone || "").trim(), mail = (SUPORTE.email || "").trim();
+  if (tel){
+    const d = tel.replace(/\D/g,"");
+    let wa = "";
+    if (SUPORTE.whatsapp && d) wa = '<a class="wa" href="https://wa.me/' + (d.length <= 11 ? "55" + d : d) + '" target="_blank" rel="noopener">Chamar no WhatsApp &rarr;</a>';
+    box.insertAdjacentHTML("beforeend", '<div class="c">' + ico.tel + '<div><small>Telefone</small><a class="v" href="tel:+' + (d.length <= 11 ? "55" + d : d) + '">' + esc(tel) + '</a>' + (wa ? '<br>' + wa : '') + '</div></div>');
+    n++;
+  }
+  if (mail){
+    box.insertAdjacentHTML("beforeend", '<div class="c">' + ico.mail + '<div><small>E-mail</small><a class="v" href="mailto:' + esc(mail) + '">' + esc(mail) + '</a></div></div>');
+    n++;
+  }
+  if (!n) document.getElementById("empty").hidden = false;
+})();
+</script>
+</body>
+</html>
